@@ -27,13 +27,15 @@ Vivid 2018 Gamification Backend
 curl "http://localhost:9090/api/user"
 ```
 
-> The above command returns JSON structured like this:
+> The above command returns the user object as JSON structured like this:
 
 ```json
 [
-  {
-    "status": "WIP"
-  }
+    {
+      "_id":"5adebdbdae55f11a677f24a4",
+      "user_id":"test@test.com",
+      "email":"test@test.com"
+    }
 ]
 ```
 
@@ -47,23 +49,25 @@ The operation to create a new user.
 
 Name | Required | Type | Description
 --------- | ----------- | --------- | -----------
-user_id | true | String | The id associated with the user
-first_name | true | String | The users first name
-last_name | true | String | The users last name
 email | true | String | The users email address
 
 ## Get a Specific User
 ```shell
-curl "http://localhost:9090/api/user/1"
+curl "http://localhost:8006/api/user/test@test.com"
 ```
 
-> The above command returns JSON structured like this:
+> The above command returns the user object as  JSON structured like this:
 
 ```json
 [
-  {
-    "status": "WIP"
-  }
+  [
+      {
+          "_id": "5adebdbdae55f11a677f24a4",
+          "user_id": "test@test.com",
+          "email": "test@test.com",
+          "__v": 0
+      }
+  ]
 ]
 ```
 
@@ -84,16 +88,29 @@ user_id | The ID of the user to retrieve
 ## Get a specific user's completed objectives
 
 ```shell
-curl "http://example.com/api/user/1/objectives"
+curl "http://localhost:8006/api/user/test@test.com/objectives"
 
 ```
-> The above command returns JSON structured like this:
+> The above command returns as list of all the users completed objectives JSON structured like this:
 
 ```json
 [
-  {
-    "status": "WIP"
-  }
+  [
+      {
+          "_id": "5adebe70ae55f11a677f24a5",
+          "user_id": "test@test.com",
+          "objective_id": "27166",
+          "created_at": "2018-04-24T05:19:44.486Z",
+          "__v": 0
+      },
+      {
+          "_id": "5adebe70ae55f11a677f24a6",
+          "user_id": "test@test.com",
+          "objective_id": "3551",
+          "created_at": "2018-04-24T05:19:44.486Z",
+          "__v": 0
+      }
+  ]
 ]
 ```
 
@@ -115,7 +132,7 @@ user_id | The ID of the user to retrieve
 curl "http://example.com/api/user/1/objectives/count"
 
 ```
-> The above command returns JSON structured like this:
+> The above command returns the count JSON:
 
 ```json
 [
@@ -150,7 +167,11 @@ curl "http://localhost:9090/api/objectives"
 ```json
 [
   {
-    "status": "WIP"
+    "_id":"5adebe70ae55f11a677f24a6",
+    "user_id":"test@test.com",
+    "objective_id":"3551",
+    "created_at":"2018-04-24T05:19:44.486Z",
+    "__v":0
   }
 ]
 ```
@@ -179,7 +200,8 @@ curl "http://localhost:9090/api/objectives"
 ```json
 [
   {
-    "status": "WIP"
+    "status":201,
+    "description":"Objectives being parsed by server"
   }
 ]
 ```
